@@ -5,7 +5,8 @@
       <span v-on:click="closeCallback" class="material-icons">
         close
       </span>
-      <img src="../assets/images/image-rules.svg" alt="Rules">
+      <img v-if="modeClassic" src="../assets/images/image-rules.svg" alt="Rules">
+      <img v-else src="../assets/images/image-rules-bonus.svg" alt="Sheldon's rules">
     </div>
   </div>
 </template>
@@ -13,7 +14,8 @@
 <script>
 export default {
   props: {
-    closeCallback: Function
+    closeCallback: Function,
+    modeClassic: Boolean,
   },
   name: "RulesComponent"
 }

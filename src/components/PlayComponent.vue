@@ -1,10 +1,10 @@
 <template>
   <div id="root">
     <div id="play-component">
-      <img id="triangle" src="../assets/images/bg-triangle.svg" alt="">
-      <MoveComponent v-bind:move="'paper'" v-on:click="play('paper')"/>
-      <MoveComponent move="scissors" v-on:click="play('scissors')"/>
-      <MoveComponent move="rock" v-on:click="play('rock')"/>
+      <img v-if="modeClassic" class="background" src="../assets/images/bg-triangle.svg" alt="">
+      <img v-else class="background" src="../assets/images/bg-pentagon.svg" alt="">
+      <MoveComponent v-for="(move, index) in moves" :key="index"
+                     :move="move" @click="play(move)" :class="modeClassic? '':'sheldon'" />
     </div>
   </div>
 </template>
@@ -15,7 +15,9 @@ export default {
   name: "PlayComponent",
   components: {MoveComponent},
   props: {
-    play: Function
+    play: Function,
+    moves: Array,
+    modeClassic: Boolean
   },
 }
 </script>
@@ -38,7 +40,7 @@ export default {
   position: relative;
 }
 
-#triangle {
+.background {
   height: 50%;
 }
 .move {
@@ -56,20 +58,46 @@ export default {
     filter: brightness(0.8);
   }
 }
+
 #paper {
-  left: -25%;
-  top: -25%;
+  &.sheldon {
+    top: 10%;
+    right: -25%;
+  }
+  &:not(.sheldon) {
+    left: -25%;
+    top: -25%;
+  }
 }
 #scissors {
-  right: -25%;
-  top: -25%;
+  &:not(.sheldon) {
+    right: -25%;
+    top: -25%;
+  }
+  &.sheldon {
+    top: -25%;
+  }
 }
 #rock {
+  &:not(.sheldon) {
+    bottom: -20%;
+  }
+  &.sheldon {
+    bottom: -25%;
+    right: -5%;
+  }
+}
+#lizard {
   bottom: -25%;
+  left: -5%;
+}
+#spock {
+  top: 10%;
+  left: -25%;
 }
 
 @media (max-width: 600px){
-  #triangle {
+  .background {
     height: 180px;
   }
 }

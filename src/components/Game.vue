@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PlayComponent v-show="!endGame" :play="play"></PlayComponent>
+    <PlayComponent v-show="!endGame" :play="play" :moves="moves" :mode-classic="modeClassic"></PlayComponent>
     <EndComponent :player-move="playerMove" :house-move="houseMove"
                   v-show="endGame" :reset="reset" :msg-score="msgScore"></EndComponent>
   </div>
@@ -9,6 +9,36 @@
 <script>
 import PlayComponent from "@/components/PlayComponent";
 import EndComponent from "@/components/EndComponent";
+
+function whoWinsClassic(playerMove, houseMove) {
+  let tab = ["rock", "paper", "scissors"];
+  let res = tab.indexOf(playerMove) - tab.indexOf(houseMove);
+  if (res===0) {
+    return 0;
+  } else if (res === 1 || res === -2) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
+
+function whoWinsSheldon(playerMove, houseMove) {
+  if (playerMove === houseMove) {
+    return 0;
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  let tab = ["rock", "paper", "scissors", "lizard", "spock"];
+  // eslint-disable-next-line no-unused-vars
+  let beats = [
+    ["lizard", "scissors"],
+    ["spock", "rock"],
+    ["lizard", "paper"],
+    ["paper", "spock"],
+    ["scissors", "rock"]
+  ]
+  return beats[tab.indexOf(playerMove)].includes(houseMove) ? 1 : -1;
+}
 
 export default {
   name: "Game-component",
@@ -24,24 +54,36 @@ export default {
     }
   },
   props: {
-    addScore: Function
+    addScore: Function,
+    modeClassic: Boolean
+  },
+  computed: {
+    moves() {
+      return this.modeClassic? ["rock", "paper", "scissors"] :
+        ["rock", "paper", "scissors", "lizard", "spock"]
+    }
   },
   methods: {
     play(move) {
       this.playerMove = move;
-      this.houseMove = ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
+      this.houseMove = this.moves[Math.floor(Math.random() * this.moves.length)];
 
-      let tab = ["paper", "rock", "scissors"];
-      let res = tab.indexOf(this.playerMove) - tab.indexOf(this.houseMove);
-      if (res === 0) {
-        this.msgScore = "TIE";
-      } else if (res === 1 || res === -2) {
-        this.msgScore = "YOU LOSE";
-        this.addScore(-1);
-      } else {
-        this.msgScore = "YOU WIN";
-        this.addScore(1);
+      let score = this.modeClassic?
+          whoWinsClassic(this.playerMove, this.houseMove) :
+          whoWinsSheldon(this.playerMove, this.houseMove);
+      switch (score) {
+        case 0:
+          this.msgScore = "TIE";
+          break;
+        case 1:
+          this.msgScore = "YOU WIN";
+          break;
+        case -1:
+          this.msgScore = "YOU LOSE";
+          this.addScore(-1);
+          break;
       }
+      this.addScore(score);
 
       this.endGame = true;
     },

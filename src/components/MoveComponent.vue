@@ -44,6 +44,12 @@ export default {
 #rock {
   border-color: var(--rock);
 }
+#spock {
+  border-color: var(--spock);
+}
+#lizard {
+  border-color: var(--lizard);
+}
 
 @media (max-width: 600px){
   .move {

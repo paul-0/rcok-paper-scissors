@@ -6,9 +6,14 @@
       <div>{{ score }}</div>
     </div>
   </div>
-  <GameComponent id="content" :add-score="addScore" />
-  <button id="button-rules" @click="showRules^=true">RULES</button>
-  <RulesComponent v-show="showRules" :close-callback="() => {this.showRules=false}"></RulesComponent>
+  <GameComponent id="content" :add-score="addScore" :mode-classic="modeClassic" />
+  <div id="div-buttons">
+    <button id="button-rules" @click="showRules^=true">RULES</button>
+    <button id="button-mode" @click="changeMode">MODE:
+      {{ modeClassic? "CLASSIC":"SHELDON" }}</button>
+  </div>
+  <RulesComponent v-show="showRules" :mode-classic="modeClassic"
+                  :close-callback="() => {this.showRules=false}"></RulesComponent>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="https://github.com/paul-0">Paul Devilliers</a>.
@@ -23,7 +28,8 @@ export default {
   data() {
     return {
       score: parseInt(localStorage.getItem('score')) || 0,
-      showRules: false
+      showRules: false,
+      modeClassic: true
     }
   },
   components: {
@@ -34,6 +40,9 @@ export default {
     addScore(score) {
       this.score += score;
       localStorage.setItem('score', this.score.toString());
+    },
+    changeMode() {
+      this.modeClassic = !this.modeClassic;
     }
   }
 }
@@ -59,6 +68,8 @@ export default {
   --scissors: hsl(39, 89%, 49%);
   --paper:  hsl(230, 89%, 62%);
   --rock: hsl(349, 71%, 52%);
+  --lizard: hsl(261, 73%, 60%);
+  --spock: hsl(189, 59%, 53%);
 
   --transparent-gray: #80808099;
   --dark-text: hsl(229, 25%, 31%);
@@ -81,19 +92,23 @@ export default {
   display: flex;
   flex-direction: column;
 
-  #button-rules {
-    background: none;
-    border: medium solid var(--transparent-gray);
-    color: var(--transparent-gray);
-    border-radius: 100px;
-    width: max-content;
+  #div-buttons {
     position: absolute;
-    padding: 5px 20px;
-    font-weight: bold;
-    cursor: pointer;
     right: 2rem;
     bottom: 4rem;
+    button {
+      background: none;
+      border: medium solid var(--transparent-gray);
+      color: var(--transparent-gray);
+      border-radius: 100px;
+      width: max-content;
+      padding: 5px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 0 0.5rem;
+    }
   }
+
 }
 
 #content {
@@ -150,7 +165,7 @@ export default {
     }
   }
 
-  #button-rules {
+  #div-buttons {
     margin: auto;
     position: static !important;
   }
