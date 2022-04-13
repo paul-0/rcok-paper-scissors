@@ -111,4 +111,33 @@ export default {
   }
 }
 
+@media (max-width: 600px){
+  #end-component {
+    position: relative;
+    margin: 0;
+  }
+  #player, #house {
+    width: 50%;
+    height: 50%;
+  }
+  #div-replay {
+    margin-top: 0;
+    position: absolute;
+    bottom: 2rem;
+    right: 0;
+    left: 0;
+  }
+  .choosen-move {
+    width: 6rem;
+    height: 5rem;
+  }
+  .winner {
+    background: radial-gradient(circle at center,
+        transparent 15%,
+        opacify(transparent, 0.4) 15%, opacify(transparent, 0.4) 30%,
+        opacify(transparent, 0.2) 30%, opacify(transparent, 0.2) 45%,
+        opacify(transparent, 0.1) 45%, opacify(transparent, 0.1) 60%,
+        transparent 60%);
+  }
+}
 </style>

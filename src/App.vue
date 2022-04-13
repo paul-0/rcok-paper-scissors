@@ -69,6 +69,7 @@ export default {
   height: 100%;
   width: 100%;
   margin: 0;
+  min-width: 300px;
 }
 
 #app {
@@ -128,6 +129,33 @@ export default {
       font-weight: bolder;
       color: var(--dark-text);
     }
+  }
+}
+
+@media (max-width: 600px) {
+  #top {
+    width: 60%;
+    font-size: xx-small;
+    margin: 1rem auto;
+
+    #score {
+      font-size: small;
+      padding-top: 3px;
+      margin-right: 1rem;
+      height: 3rem;
+      width: 3rem;
+      div {
+        font-size: x-large;
+      }
+    }
+  }
+
+  #button-rules {
+    margin: auto;
+    position: static !important;
+  }
+  .attribution {
+    margin: 0.7rem auto;
   }
 }
 </style>

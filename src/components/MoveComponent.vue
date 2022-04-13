@@ -24,7 +24,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .move {
   position: absolute;
   background-color: white;
@@ -44,5 +43,13 @@ export default {
 }
 #rock {
   border-color: var(--rock);
+}
+
+@media (max-width: 600px){
+  .move {
+    height: 6rem !important;
+    width: 6rem !important;
+    border-width: 0.8rem !important;
+  }
 }
 </style>

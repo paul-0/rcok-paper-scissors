@@ -60,4 +60,20 @@ img {
   width: auto;
   height: 300px;
 }
+
+@media (max-width: 600px){
+  #rules {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  span {
+    top: auto;
+    bottom: 2rem;
+    right: 0;
+    left: 0;
+  }
+}
+
 </style>

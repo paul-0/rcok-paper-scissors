@@ -67,4 +67,10 @@ export default {
 #rock {
   bottom: -25%;
 }
+
+@media (max-width: 600px){
+  #triangle {
+    height: 180px;
+  }
+}
 </style>
