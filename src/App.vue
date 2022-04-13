@@ -1,22 +1,23 @@
 <template>
   <div id="top">
-    <h1>ROCK PAPER SCISSORS</h1>
+    <h1 v-if="modeClassic">{{ $t('title') }}</h1>
+    <h3 v-else>{{ $t('title-sheldon') }}</h3>
     <div id="score">
-      SCORE
+      {{ $t('score') }}
       <div>{{ score }}</div>
     </div>
   </div>
   <GameComponent id="content" :add-score="addScore" :mode-classic="modeClassic" />
   <div id="div-buttons">
-    <button id="button-rules" @click="showRules^=true">RULES</button>
-    <button id="button-mode" @click="changeMode">MODE:
-      {{ modeClassic? "CLASSIC":"SHELDON" }}</button>
+    <button id="button-rules" @click="showRules^=true">{{ $t('rules') }}</button>
+    <button id="button-mode" @click="changeMode">{{ modeClassic? $t('mode-classic'):$t('mode-sheldon') }}</button>
+    <button id="change-locale" @click="changeLocale">{{ $t('language')+this.$i18n.locale}}</button>
   </div>
   <RulesComponent v-show="showRules" :mode-classic="modeClassic"
                   :close-callback="() => {this.showRules=false}"></RulesComponent>
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="https://github.com/paul-0">Paul Devilliers</a>.
+    {{ $t('challenge-by') }} <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    {{ $t('coded-by') }} <a href="https://github.com/paul-0">Paul Devilliers</a>.
   </div>
 </template>
 
@@ -43,6 +44,9 @@ export default {
     },
     changeMode() {
       this.modeClassic = !this.modeClassic;
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'en' ? 'fr' : 'en';
     }
   }
 }
@@ -96,6 +100,11 @@ export default {
     position: absolute;
     right: 2rem;
     bottom: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+
     button {
       background: none;
       border: medium solid var(--transparent-gray);
@@ -105,7 +114,6 @@ export default {
       padding: 5px 20px;
       font-weight: bold;
       cursor: pointer;
-      margin: 0 0.5rem;
     }
   }
 
@@ -124,7 +132,7 @@ export default {
   border-radius: 1rem;
   padding: 0 1rem;
 
-  h1 {
+  h1,h2,h3 {
     font-weight: bolder;
     width: min-content;
     margin-right: auto;

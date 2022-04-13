@@ -1,7 +1,7 @@
 <template>
   <div id="div-rules">
     <div id="rules">
-      <h1>RULES</h1>
+      <h1>{{ $t('rules') }}</h1>
       <span v-on:click="closeCallback" class="material-icons">
         close
       </span>

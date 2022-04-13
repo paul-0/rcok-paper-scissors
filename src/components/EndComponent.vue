@@ -1,21 +1,21 @@
 <template>
   <div id="end-component">
     <div id="player">
-      <h2>YOU PICKED</h2>
+      <h2>{{ $t('you-picked') }}</h2>
       <div class="choosen-move">
         <MoveComponent :move="playerMove" />
-        <div v-show="msgScore==='YOU WIN'" class="winner"></div>
+        <div v-show="msgScore==='you-win'" class="winner"></div>
       </div>
     </div>
     <div id="div-replay">
-      <h2>{{ msgScore }}</h2>
-      <button @click="reset">PLAY AGAIN</button>
+      <h2 :class="msgColor">{{ $t(msgScore) }}</h2>
+      <button @click="reset">{{ $t('play-again') }}</button>
     </div>
     <div id="house">
-      <h2>THE HOUSE PICKED</h2>
+      <h2>{{ $t('the-house-picked') }}</h2>
       <div class="choosen-move">
         <MoveComponent class="house-move" :move="houseMove" />
-        <div v-show="msgScore==='YOU LOSE'" class="winner"></div>
+        <div v-show="msgScore==='you-lose'" class="winner"></div>
       </div>
     </div>
   </div>
@@ -42,6 +42,12 @@ export default {
     msgScore: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    msgColor() {
+      return this.msgScore === "you-win" ? "green" :
+          this.msgScore==="you-lose" ? "red" : "";
     }
   }
 }
@@ -109,6 +115,12 @@ export default {
     color: var(--dark-text);
     cursor: pointer;
   }
+}
+.red {
+  color: #dc2e4e;
+}
+.green {
+  color: #2a8a37;
 }
 
 @media (max-width: 600px){

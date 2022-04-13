@@ -1,0 +1,17 @@
+{
+  "title": "ROCK PAPER SCISSORS",
+  "title-sheldon": "ROCK PAPER SCISSORS LIZARD SPOCK",
+  "rules": "RULES",
+  "play-again": "PLAY AGAIN",
+  "score": "SCORE",
+  "mode-classic": "MODE: CLASSIC",
+  "mode-sheldon": "MODE: SHELDON",
+  "you-picked": "YOU PICKED",
+  "the-house-picked": "THE HOUSE PICKED",
+  "you-win": "YOU WIN",
+  "you-lose": "YOU LOSE",
+  "tie": "TIE",
+  "challenge-by": "Challenge by",
+  "coded-by": "Coded by",
+  "language": "LANGUAGE: "
+}

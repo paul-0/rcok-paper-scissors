@@ -27,9 +27,7 @@ function whoWinsSheldon(playerMove, houseMove) {
     return 0;
   }
 
-  // eslint-disable-next-line no-unused-vars
   let tab = ["rock", "paper", "scissors", "lizard", "spock"];
-  // eslint-disable-next-line no-unused-vars
   let beats = [
     ["lizard", "scissors"],
     ["spock", "rock"],
@@ -73,13 +71,13 @@ export default {
           whoWinsSheldon(this.playerMove, this.houseMove);
       switch (score) {
         case 0:
-          this.msgScore = "TIE";
+          this.msgScore = "tie";
           break;
         case 1:
-          this.msgScore = "YOU WIN";
+          this.msgScore = "you-win";
           break;
         case -1:
-          this.msgScore = "YOU LOSE";
+          this.msgScore = "you-lose";
           this.addScore(-1);
           break;
       }
