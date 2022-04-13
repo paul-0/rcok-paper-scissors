@@ -6,9 +6,9 @@
       <div>{{ score }}</div>
     </div>
   </div>
-  <GameComponent id="content"/>
-  <button v-on:click="showRules^=true">RULES</button>
-  <RulesComponent v-show="showRules" v-bind:close-callback="() => {this.showRules=false}"></RulesComponent>
+  <GameComponent id="content" :add-score="addScore" />
+  <button id="button-rules" @click="showRules^=true">RULES</button>
+  <RulesComponent v-show="showRules" :close-callback="() => {this.showRules=false}"></RulesComponent>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="https://github.com/paul-0">Paul Devilliers</a>.
@@ -26,10 +26,14 @@ export default {
       showRules: false
     }
   },
-
   components: {
     RulesComponent,
     GameComponent
+  },
+  methods: {
+    addScore(score) {
+      this.score += score;
+    }
   }
 }
 </script>
@@ -75,7 +79,7 @@ export default {
   display: flex;
   flex-direction: column;
 
-  button {
+  #button-rules {
     background: none;
     border: medium solid var(--transparent-gray);
     color: var(--transparent-gray);

@@ -5,7 +5,7 @@
       <span v-on:click="closeCallback" class="material-icons">
         close
       </span>
-      <img src="../assets/images/image-rules.svg">
+      <img src="../assets/images/image-rules.svg" alt="Rules">
     </div>
   </div>
 </template>

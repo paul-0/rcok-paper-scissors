@@ -6,6 +6,10 @@
         <MoveComponent :move="playerMove" />
       </div>
     </div>
+    <div id="div-replay">
+      <h2>{{ msgScore }}</h2>
+      <button @click="reset">PLAY AGAIN</button>
+    </div>
     <div id="house">
       <h2>THE HOUSE PICKED</h2>
       <div class="choosen-move">
@@ -28,8 +32,16 @@ export default {
     houseMove: {
       type: String,
       required: true
+    },
+    reset: {
+      type: Function,
+      required: true
+    },
+    msgScore: {
+      type: String,
+      required: true
     }
-  },
+  }
 }
 </script>
 
@@ -40,7 +52,8 @@ export default {
   gap: 2rem;
   height: 100%;
   max-width: 700px;
-  margin: auto;
+  margin: 4rem auto auto;
+
   * {
     flex-grow: 1;
     display: flex;
@@ -58,7 +71,7 @@ export default {
 }
 
 .house-move {
-  animation: fadeIn 3s;
+  //animation: fadeIn 3s;
 }
 @keyframes fadeIn {
   from {
@@ -66,6 +79,20 @@ export default {
   }
   to {
     opacity: 1;
+  }
+}
+
+#div-replay {
+  margin-top: 4rem;
+
+  button {
+    background-color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    color: var(--dark-text);
+    cursor: pointer;
   }
 }
 
