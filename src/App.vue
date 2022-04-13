@@ -22,7 +22,7 @@ export default {
   name: 'App',
   data() {
     return {
-      score: 0,
+      score: parseInt(localStorage.getItem('score')) || 0,
       showRules: false
     }
   },
@@ -33,6 +33,7 @@ export default {
   methods: {
     addScore(score) {
       this.score += score;
+      localStorage.setItem('score', this.score.toString());
     }
   }
 }

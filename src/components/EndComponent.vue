@@ -4,6 +4,7 @@
       <h2>YOU PICKED</h2>
       <div class="choosen-move">
         <MoveComponent :move="playerMove" />
+        <div v-show="msgScore==='YOU WIN'" class="winner"></div>
       </div>
     </div>
     <div id="div-replay">
@@ -14,6 +15,7 @@
       <h2>THE HOUSE PICKED</h2>
       <div class="choosen-move">
         <MoveComponent class="house-move" :move="houseMove" />
+        <div v-show="msgScore==='YOU LOSE'" class="winner"></div>
       </div>
     </div>
   </div>
@@ -70,8 +72,21 @@ export default {
   height: 10rem;
 }
 
-.house-move {
-  //animation: fadeIn 3s;
+.winner {
+  height: 500px;
+  width: 500px;
+  background: radial-gradient(circle at center,
+      transparent 20%,
+      opacify(transparent, 0.4) 20%, opacify(transparent, 0.4) 35%,
+      opacify(transparent, 0.2) 35%, opacify(transparent, 0.2) 50%,
+      opacify(transparent, 0.1) 50%, opacify(transparent, 0.1) 65%,
+      transparent 65%);
+  position: absolute;
+  z-index: -1;
+}
+
+.house-move, #div-replay, .winner {
+  animation: fadeIn 3s;
 }
 @keyframes fadeIn {
   from {
