@@ -78,7 +78,6 @@ export default {
           break;
         case -1:
           this.msgScore = "you-lose";
-          this.addScore(-1);
           break;
       }
       this.addScore(score);
